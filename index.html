@@ -152,7 +152,6 @@
     </style>
 </head>
 <body>
-
     <!-- Header -->
     <div class="header">
         <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
@@ -165,43 +164,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
-
-            <div class="filter-group">
-                <label>Cost:</label>
-                <select id="costFilter">
-                    <option value="all">All</option>
-                    <option value="free">Free</option>
-                    <option value="paid">Paid</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Type:</label>
-                <select id="typeFilter">
-                    <option value="all">All</option>
-                    <option value="indoor">Indoor</option>
-                    <option value="outdoor">Outdoor</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Family Friendly:</label>
-                <select id="familyFilter">
-                    <option value="all">All</option>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label>Local or National:</label>
-                <select id="localOrNationalFilter">
-                    <option value="all">All</option>
-                    <option value="local">Local</option>
-                    <option value="national">National</option>
-                </select>
-            </div>
-
+            <div id="filterContainer"></div>
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
@@ -214,52 +177,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-    <script>
-        var map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-
-        var allMarkers = [];
-        var siteData = [];
-
-        function loadLocations() {
-            fetch('locations.json')
-                .then(response => response.json())
-                .then(data => {
-                    siteData = data;
-                    applyFilters();
-                })
-                .catch(error => console.error("Error loading JSON:", error));
-        }
-
-        function applyFilters() {
-            let selectedCost = document.getElementById("costFilter").value;
-            let selectedType = document.getElementById("typeFilter").value;
-            let selectedFamily = document.getElementById("familyFilter").value;
-            let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
-
-            let resultsContainer = document.getElementById("searchResults");
-            resultsContainer.innerHTML = "";
-            allMarkers.forEach(marker => map.removeLayer(marker));
-            allMarkers = [];
-
-            siteData.forEach(site => {
-                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
-                    (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
-                    (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
-                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
-                    
-                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
-                    marker.addTo(map);
-                    allMarkers.push(marker);
-
-                    resultsContainer.innerHTML += `<div class="site-card"><h3>${site.name}</h3><p>${site.description}</p></div>`;
-                }
-            });
-        }
-
-        loadLocations();
-    </script>
+    <script src="filters.js"></script>
 </body>
 </html>
