@@ -3,23 +3,54 @@ document.addEventListener("DOMContentLoaded", function () {
     loadLocations();
 });
 
-var map;
-var allMarkers = [];
-var siteData = [];
-
 function loadFilters() {
     const filters = {
-        timePeriodFilter: ["All", "Prehistoric", "Indigenous & Native History", "Colonial & Early Settlements",
+        timePeriodFilter: ["Prehistoric", "Indigenous & Native History", "Colonial & Early Settlements",
                            "19th Century & Westward Expansion", "Industrial Revolution & 20th Century",
                            "Modern History & Civil Rights"],
 
-        thematicCategoryFilter: ["All", "Military & War History", "Architectural & Urban History",
+        thematicCategoryFilter: ["Military & War History", "Architectural & Urban History",
                                  "Cultural & Artistic History", "Religious & Spiritual History",
                                  "Science & Innovation", "Maritime & Transportation"],
 
-        siteTypeFilter: ["All", "Museums & Exhibits", "Archaeological Sites", "Landmarks & Monuments",
-                         "Historic Homes & Estates", "Cemeteries & Burial Sites"],
+        siteTypeFilter: ["Museums & Exhibits", "Archaeological Sites", "Landmarks & Monuments",
+                         "Historic Homes & Estates", "Cemeteries & Burial Sites"]
+    };
 
+    let container = document.getElementById("filterContainer");
+    container.innerHTML = "";
+
+    Object.keys(filters).forEach(filterId => {
+        let filterGroup = document.createElement("div");
+        filterGroup.classList.add("filter-group");
+
+        let label = document.createElement("label");
+        label.textContent = filterId.replace(/([A-Z])/g, " $1").trim() + ":";
+
+        let checkboxContainer = document.createElement("div");
+
+        filters[filterId].forEach(option => {
+            let checkboxLabel = document.createElement("label");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = option.toLowerCase();
+            checkbox.name = filterId;
+
+            checkboxLabel.appendChild(checkbox);
+            checkboxLabel.appendChild(document.createTextNode(" " + option));
+            checkboxContainer.appendChild(checkboxLabel);
+        });
+
+        filterGroup.appendChild(label);
+        filterGroup.appendChild(checkboxContainer);
+        container.appendChild(filterGroup);
+    });
+
+    addDropdownFilters();
+}
+
+function addDropdownFilters() {
+    const dropdownFilters = {
         historyScopeFilter: ["All", "Local", "National"],
         timeframeFilter: ["All", "5 - 10 min", "10 min - 1 hour", "1+ hours"],
         costFilter: ["All", "Free", "$1 - 5", "$6 - 20", "$20+"],
@@ -42,9 +73,8 @@ function loadFilters() {
     };
 
     let container = document.getElementById("filterContainer");
-    container.innerHTML = "";
-
-    Object.keys(filters).forEach(filterId => {
+    
+    Object.keys(dropdownFilters).forEach(filterId => {
         let filterGroup = document.createElement("div");
         filterGroup.classList.add("filter-group");
 
@@ -54,7 +84,7 @@ function loadFilters() {
         let select = document.createElement("select");
         select.id = filterId;
 
-        filters[filterId].forEach(option => {
+        dropdownFilters[filterId].forEach(option => {
             let opt = document.createElement("option");
             opt.value = option.toLowerCase();
             opt.textContent = option;
@@ -67,75 +97,6 @@ function loadFilters() {
     });
 }
 
-function loadLocations() {
-    fetch('locations.json')
-        .then(response => response.json())
-        .then(data => {
-            siteData = data;
-            initializeMap();
-            applyFilters();
-        })
-        .catch(error => console.error("Error loading JSON:", error));
-}
-
-function initializeMap() {
-    if (!map) {
-        map = L.map('map').setView([39.7392, -104.9903], 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
-    }
-}
-
 function applyFilters() {
-    let selectedFilters = {
-        timePeriod: document.getElementById("timePeriodFilter").value,
-        thematicCategory: document.getElementById("thematicCategoryFilter").value,
-        siteType: document.getElementById("siteTypeFilter").value,
-        historyScope: document.getElementById("historyScopeFilter").value,
-        timeframe: document.getElementById("timeframeFilter").value,
-        cost: document.getElementById("costFilter").value,
-        distance: document.getElementById("distanceFilter").value,
-        reservation: document.getElementById("reservationFilter").value,
-        tourType: document.getElementById("tourTypeFilter").value,
-        transit: document.getElementById("transitFilter").value,
-        family: document.getElementById("familyFilter").value,
-        dogFriendly: document.getElementById("dogFriendlyFilter").value,
-        giftShop: document.getElementById("giftShopFilter").value,
-        dining: document.getElementById("diningFilter").value,
-        hiddenGem: document.getElementById("hiddenGemFilter").value,
-        mustSee: document.getElementById("mustSeeFilter").value,
-        monday: document.getElementById("mondayFilter").value,
-        openLate: document.getElementById("openLateFilter").value,
-        openEarly: document.getElementById("openEarlyFilter").value,
-        luggageStorage: document.getElementById("luggageStorageFilter").value,
-        payment: document.getElementById("paymentFilter").value,
-        publicAccess: document.getElementById("publicAccessFilter").value
-    };
-
-    let resultsContainer = document.getElementById("searchResults");
-    resultsContainer.innerHTML = "";
-    allMarkers.forEach(marker => map.removeLayer(marker));
-    allMarkers = [];
-
-    siteData.forEach(site => {
-        let matchesFilters = Object.keys(selectedFilters).every(filterKey => {
-            let filterValue = selectedFilters[filterKey].toLowerCase();
-            return filterValue === "all" || (site[filterKey] && site[filterKey].toLowerCase() === filterValue);
-        });
-
-        if (matchesFilters) {
-            let marker = L.marker([site.lat, site.lng]).bindPopup(
-                `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br>
-                 <b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
-            );
-            marker.addTo(map);
-            allMarkers.push(marker);
-
-            let siteCard = document.createElement("div");
-            siteCard.classList.add("site-card");
-            siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
-            resultsContainer.appendChild(siteCard);
-        }
-    });
+    console.log("Filters applied! (To be linked with the data)");
 }
