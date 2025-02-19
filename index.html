@@ -7,7 +7,7 @@
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-
+    
     <!-- Custom Styles -->
     <style>
         body {
@@ -28,12 +28,10 @@
             color: #03FDFC;
         }
 
-        /* Logo on the left */
         #logo {
             width: 80px;
         }
 
-        /* Tagline centered */
         .tagline {
             flex-grow: 1;
             text-align: center;
@@ -42,14 +40,13 @@
             color: #03FDFC;
         }
 
-        /* TRAIPSE on the far right */
         .title-container {
             font-size: 2.2em;
             font-weight: bold;
             margin-left: auto;
         }
 
-        /* Main Layout: Sidebar + Content */
+        /* Main Layout */
         .container {
             display: flex;
             height: calc(100vh - 120px);
@@ -57,7 +54,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 280px;
+            width: 300px;
             background: #181818;
             padding: 15px;
             color: white;
@@ -70,12 +67,11 @@
         }
 
         .filter-group {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .filter-group label {
             display: block;
-            margin: 8px 0;
             font-size: 1em;
         }
 
@@ -103,7 +99,7 @@
             background-color: #02c9c9;
         }
 
-        /* Content - Split into Results and Map */
+        /* Content */
         .content {
             flex-grow: 1;
             display: flex;
@@ -113,7 +109,6 @@
             overflow: hidden;
         }
 
-        /* Left Side - Search Results */
         .search-results {
             width: 50%;
             overflow-y: auto;
@@ -121,8 +116,6 @@
         }
 
         .site-card {
-            display: flex;
-            align-items: center;
             background: #333;
             padding: 15px;
             border-radius: 10px;
@@ -130,20 +123,11 @@
             color: white;
         }
 
-        .site-card img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-
         .site-card h3 {
             margin: 0;
             color: #03FDFC;
         }
 
-        /* Right Side - Map */
         #map {
             width: 50%;
             height: 100%;
@@ -165,117 +149,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <h2>Filters</h2>
-
-            <div class="filter-group">
-                <label>Time Period:</label>
-                <select id="timePeriodFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Thematic Category:</label>
-                <select id="thematicCategoryFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Type of Site:</label>
-                <select id="siteTypeFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Scope of History:</label>
-                <select id="historyScopeFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Estimated Timeframe:</label>
-                <select id="timeframeFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Cost:</label>
-                <select id="costFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Distance:</label>
-                <select id="distanceFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Reservation Required:</label>
-                <select id="reservationFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Guided vs. Self Tour:</label>
-                <select id="tourTypeFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Accessible by Transit:</label>
-                <select id="transitFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Family Friendly:</label>
-                <select id="familyFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Dog Friendly:</label>
-                <select id="dogFriendlyFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Gift Shop:</label>
-                <select id="giftShopFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Dining on Site:</label>
-                <select id="diningFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Hidden Gem:</label>
-                <select id="hiddenGemFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Must See:</label>
-                <select id="mustSeeFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Open on Mondays:</label>
-                <select id="mondayFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Open Late:</label>
-                <select id="openLateFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Open Early:</label>
-                <select id="openEarlyFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Luggage Storage:</label>
-                <select id="luggageStorageFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Payment Method:</label>
-                <select id="paymentFilter"></select>
-            </div>
-
-            <div class="filter-group">
-                <label>Public Access:</label>
-                <select id="publicAccessFilter"></select>
-            </div>
-
+            <div id="filterContainer"></div>
             <button onclick="applyFilters()">Apply Filters</button>
         </div>
 
@@ -287,8 +161,7 @@
     </div>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="filters.js"></script>
-    <script src="map.js"></script>
 </body>
 </html>
