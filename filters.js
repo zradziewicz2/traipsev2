@@ -65,3 +65,4 @@ function loadFilters() {
 
 function applyFilters() {
     console.log("Filters applied! (To be linked with the data)");
+}
