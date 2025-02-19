@@ -5,52 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function loadFilters() {
     const filters = {
-        timePeriodFilter: ["Prehistoric", "Indigenous & Native History", "Colonial & Early Settlements",
-                           "19th Century & Westward Expansion", "Industrial Revolution & 20th Century",
-                           "Modern History & Civil Rights"],
-
-        thematicCategoryFilter: ["Military & War History", "Architectural & Urban History",
-                                 "Cultural & Artistic History", "Religious & Spiritual History",
-                                 "Science & Innovation", "Maritime & Transportation"],
-
-        siteTypeFilter: ["Museums & Exhibits", "Archaeological Sites", "Landmarks & Monuments",
-                         "Historic Homes & Estates", "Cemeteries & Burial Sites"]
-    };
-
-    let container = document.getElementById("filterContainer");
-    container.innerHTML = "";
-
-    Object.keys(filters).forEach(filterId => {
-        let filterGroup = document.createElement("div");
-        filterGroup.classList.add("filter-group");
-
-        let label = document.createElement("label");
-        label.textContent = filterId.replace(/([A-Z])/g, " $1").trim() + ":";
-
-        let checkboxContainer = document.createElement("div");
-
-        filters[filterId].forEach(option => {
-            let checkboxLabel = document.createElement("label");
-            let checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.value = option.toLowerCase();
-            checkbox.name = filterId;
-
-            checkboxLabel.appendChild(checkbox);
-            checkboxLabel.appendChild(document.createTextNode(" " + option));
-            checkboxContainer.appendChild(checkboxLabel);
-        });
-
-        filterGroup.appendChild(label);
-        filterGroup.appendChild(checkboxContainer);
-        container.appendChild(filterGroup);
-    });
-
-    addDropdownFilters();
-}
-
-function addDropdownFilters() {
-    const dropdownFilters = {
+        timePeriodFilter: ["Prehistoric", "Indigenous & Native History", "Colonial & Early Settlements", "19th Century & Westward Expansion", "Industrial Revolution & 20th Century", "Modern History & Civil Rights"],
+        thematicCategoryFilter: ["Military & War History", "Architectural & Urban History", "Cultural & Artistic History", "Religious & Spiritual History", "Science & Innovation", "Maritime & Transportation"],
+        siteTypeFilter: ["Museums & Exhibits", "Archaeological Sites", "Landmarks & Monuments", "Historic Homes & Estates", "Cemeteries & Burial Sites"],
         historyScopeFilter: ["All", "Local", "National"],
         timeframeFilter: ["All", "5 - 10 min", "10 min - 1 hour", "1+ hours"],
         costFilter: ["All", "Free", "$1 - 5", "$6 - 20", "$20+"],
@@ -73,18 +30,49 @@ function addDropdownFilters() {
     };
 
     let container = document.getElementById("filterContainer");
-    
-    Object.keys(dropdownFilters).forEach(filterId => {
+    container.innerHTML = "";
+
+    // Checkboxes for multi-select filters
+    ["timePeriodFilter", "thematicCategoryFilter", "siteTypeFilter"].forEach(filterId => {
         let filterGroup = document.createElement("div");
         filterGroup.classList.add("filter-group");
 
         let label = document.createElement("label");
         label.textContent = filterId.replace(/([A-Z])/g, " $1").trim() + ":";
+        filterGroup.appendChild(label);
 
+        filters[filterId].forEach(option => {
+            let checkboxWrapper = document.createElement("div");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = option.toLowerCase();
+            checkbox.name = filterId;
+
+            let checkboxLabel = document.createElement("label");
+            checkboxLabel.textContent = option;
+            checkboxWrapper.appendChild(checkbox);
+            checkboxWrapper.appendChild(checkboxLabel);
+
+            filterGroup.appendChild(checkboxWrapper);
+        });
+
+        container.appendChild(filterGroup);
+    });
+
+    // Dropdowns for other filters
+    Object.keys(filters).forEach(filterId => {
+        if (["timePeriodFilter", "thematicCategoryFilter", "siteTypeFilter"].includes(filterId)) return; // Skip checkboxes
+        
+        let filterGroup = document.createElement("div");
+        filterGroup.classList.add("filter-group");
+
+        let label = document.createElement("label");
+        label.textContent = filterId.replace(/([A-Z])/g, " $1").trim() + ":";
+        
         let select = document.createElement("select");
         select.id = filterId;
 
-        dropdownFilters[filterId].forEach(option => {
+        filters[filterId].forEach(option => {
             let opt = document.createElement("option");
             opt.value = option.toLowerCase();
             opt.textContent = option;
