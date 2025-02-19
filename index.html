@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traipse - Discover History Around You</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #111;
+            color: #03FDFC;
+        }
+
+        /* Logo on the left */
+        #logo {
+            width: 80px;
+        }
+
+        /* Tagline centered */
+        .tagline {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #03FDFC;
+        }
+
+        /* TRAIPSE on the far right */
+        .title-container {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        /* Main Layout: Sidebar + Content */
+        .container {
+            display: flex;
+            height: calc(100vh - 120px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: #181818;
+            padding: 15px;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #03FDFC;
+            font-size: 1.2em;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin: 8px 0;
+            font-size: 1em;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background-color: #03FDFC;
+            color: #000;
+            border: none;
+            padding: 10px;
+            font-size: 1em;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #02c9c9;
+        }
+
+        /* Content - Split into Results and Map */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            padding: 15px;
+            background: #222;
+            overflow: hidden;
+        }
+
+        /* Left Side - Search Results */
+        .search-results {
+            width: 50%;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .site-card {
+            display: flex;
+            align-items: center;
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .site-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .site-card h3 {
+            margin: 0;
+            color: #03FDFC;
+        }
+
+        /* Right Side - Map */
+        #map {
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <img id="logo" src="traipse_logo_turquoise.png" alt="Traipse Logo">
+        <span class="tagline">Step into the past—explore history, culture, and hidden gems near you.</span>
+        <div class="title-container">TRAIPSE</div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Filters</h2>
+
+            <div class="filter-group">
+                <label>Cost:</label>
+                <select id="costFilter">
+                    <option value="all">All</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Family Friendly:</label>
+                <select id="familyFilter">
+                    <option value="all">All</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Local or National:</label>
+                <select id="localOrNationalFilter">
+                    <option value="all">All</option>
+                    <option value="local">Local</option>
+                    <option value="national">National</option>
+                </select>
+            </div>
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- Content - Left: Results | Right: Map -->
+        <div class="content">
+            <div class="search-results" id="searchResults"></div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+        var map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var allMarkers = [];
+        var siteData = [];
+
+        function loadLocations() {
+            fetch('locations.json')
+                .then(response => response.json())
+                .then(data => {
+                    siteData = data;
+                    applyFilters();
+                })
+                .catch(error => console.error("Error loading JSON:", error));
+        }
+
+        function applyFilters() {
+            let selectedCost = document.getElementById("costFilter").value;
+            let selectedType = document.getElementById("typeFilter").value;
+            let selectedFamily = document.getElementById("familyFilter").value;
+            let selectedLocalOrNational = document.getElementById("localOrNationalFilter").value;
+
+            let resultsContainer = document.getElementById("searchResults");
+            resultsContainer.innerHTML = "";
+            allMarkers.forEach(marker => map.removeLayer(marker));
+            allMarkers = [];
+
+            siteData.forEach(site => {
+                if ((selectedCost === "all" || site.cost.toLowerCase() === selectedCost) &&
+                    (selectedType === "all" || site.type.toLowerCase() === selectedType) &&
+                    (selectedFamily === "all" || String(site.family_friendly) === selectedFamily) &&
+                    (selectedLocalOrNational === "all" || site.localornational.toLowerCase() === selectedLocalOrNational)) {
+                    
+                    let marker = L.marker([site.lat, site.lng]).bindPopup(`<b>${site.name}</b><br>${site.description}`);
+                    marker.addTo(map);
+                    allMarkers.push(marker);
+
+                    resultsContainer.innerHTML += `<div class="site-card"><h3>${site.name}</h3><p>${site.description}</p></div>`;
+                }
+            });
+        }
+
+        loadLocations();
+    </script>
+</body>
+</html>

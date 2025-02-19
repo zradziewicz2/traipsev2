@@ -1,0 +1,381 @@
+[
+    {
+        "name": "Dinosaur Ridge",
+        "lat": 39.6766,
+        "lng": -105.1926,
+        "description": "A famous fossil site showcasing dinosaur tracks and bones along a scenic trail.",
+        "cost": "Free",
+        "type": "Outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Molly Brown House Museum",
+        "lat": 39.7374,
+        "lng": -104.9807,
+        "description": "The preserved home of Titanic survivor Margaret 'Molly' Brown, showcasing Victorian-era history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Red Rocks Park & Amphitheater",
+        "lat": 39.6654,
+        "lng": -105.2057,
+        "description": "A world-famous concert venue set among stunning natural red rock formations.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Colorado State Capitol",
+        "lat": 39.7392,
+        "lng": -104.9849,
+        "description": "A historic government building with a gold-domed roof and stunning city views.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Union Station",
+        "lat": 39.7541,
+        "lng": -105.0005,
+        "description": "A beautifully restored 1914 train station featuring shops, restaurants, and history.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Buffalo Bill Museum & Grave",
+        "lat": 39.7310,
+        "lng": -105.2386,
+        "description": "Museum dedicated to Wild West showman Buffalo Bill Cody, with scenic views from Lookout Mountain.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Four Mile Historic Park",
+        "lat": 39.6938,
+        "lng": -104.9247,
+        "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "History Colorado Center",
+        "lat": 39.7377,
+        "lng": -104.9866,
+        "description": "An interactive museum showcasing Colorado’s past through exhibits and artifacts.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Denver Botanic Gardens",
+        "lat": 39.7320,
+        "lng": -104.9610,
+        "description": "A beautiful 23-acre garden featuring diverse plant collections from around the world.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Colorado Railroad Museum",
+        "lat": 39.7778,
+        "lng": -105.1933,
+        "description": "A museum preserving Colorado’s rich railroad history with historic trains and exhibits.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Wings Over the Rockies Air & Space Museum",
+        "lat": 39.7207,
+        "lng": -104.8929,
+        "description": "An aviation and space museum featuring aircraft and interactive exhibits.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Four Mile Historic Park",
+        "lat": 39.6938,
+        "lng": -104.9247,
+        "description": "A preserved 19th-century homestead offering a glimpse into pioneer life.",
+        "cost": "paid",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Black American West Museum",
+        "lat": 39.7582,
+        "lng": -104.9768,
+        "description": "A museum highlighting the often-overlooked contributions of Black pioneers in the American West.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Byers-Evans House Museum",
+        "lat": 39.7375,
+        "lng": -104.9885,
+        "description": "A historic mansion showcasing Denver’s early aristocracy.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "local"
+    },
+    {
+        "name": "Grant-Frontier Park",
+        "lat": 39.6683,
+        "lng": -105.0136,
+        "description": "A scenic park on the South Platte River with historical significance as an early pioneer settlement.",
+        "cost": "Free",
+        "type": "Outdoor",
+        "family_friendly": true,
+        "localornational": "Local"
+    },
+    {
+        "name": "Vintage Aero Flying Museum",
+        "lat": 40.1062,
+        "lng": -104.6442,
+        "description": "A museum showcasing vintage aircraft and aviation history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Colorado Aviation Historical Society",
+        "lat": 39.8633,
+        "lng": -104.6737,
+        "description": "Dedicated to preserving and showcasing Colorado’s aviation history.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Franktown Cave",
+        "lat": 39.3906,
+        "lng": -104.7489,
+        "description": "An archaeological site containing evidence of prehistoric Native American habitation.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": false,
+        "localornational": "local"
+    },
+    {
+        "name": "History Colorado Center",
+        "lat": 39.7377,
+        "lng": -104.9866,
+        "description": "A museum offering interactive exhibits on Colorado's history, from indigenous cultures to contemporary times.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Kirkland Museum of Fine & Decorative Art",
+        "lat": 39.7315,
+        "lng": -104.9789,
+        "description": "Showcases a vast collection of decorative art from every major design period, alongside works by Colorado artists.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Forney Museum of Transportation",
+        "lat": 39.7803,
+        "lng": -104.9691,
+        "description": "Features a diverse collection of over 500 transportation artifacts, including vintage automobiles, locomotives, and aircraft.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Museo de las Americas",
+        "lat": 39.7293,
+        "lng": -104.9981,
+        "description": "A museum dedicated to Latino art and culture, featuring exhibitions spanning from ancient to contemporary works.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Grant-Humphreys Mansion",
+        "lat": 39.7313,
+        "lng": -104.9801,
+        "description": "A historic mansion built in 1902, listed on the National Register of Historic Places.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "National"
+    },
+    {
+        "name": "International Church of Cannabis",
+        "lat": 39.7054,
+        "lng": -104.9773,
+        "description": "A unique venue featuring vibrant murals and an immersive spiritual experience.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "Local"
+    },
+    {
+        "name": "The Cruise Room",
+        "lat": 39.7526,
+        "lng": -104.9987,
+        "description": "Denver's oldest bar, opened the day after Prohibition ended in 1933, featuring an art deco ambiance.",
+        "cost": "Paid",
+        "type": "Indoor",
+        "family_friendly": false
+    },
+    {
+        "name": "Poet's Row",
+        "lat": 39.7338,
+        "lng": -104.9835,
+        "description": "A collection of historic apartment buildings, each named after a famous poet, showcasing early 20th-century architecture.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Buckhorn Exchange",
+        "lat": 39.7300,
+        "lng": -105.0076,
+        "description": "Denver's oldest restaurant, established in 1893, filled with historic artifacts and taxidermy.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "local"
+    },
+    {
+        "name": "My Brother's Bar",
+        "lat": 39.7563,
+        "lng": -105.0072,
+        "description": "A historic bar dating back to the 1870s, once frequented by Beat Generation icons like Neal Cassady and Jack Kerouac.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "local"
+    },
+    {
+        "name": "Denver Zine Library",
+        "lat": 39.7389,
+        "lng": -104.9823,
+        "description": "A unique library housing over 15,000 self-published works, preserving the culture of DIY publishing.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Linger Eatuary",
+        "lat": 39.7593,
+        "lng": -105.0116,
+        "description": "An eclectic restaurant, once a mortuary, offering panoramic city views and a diverse menu.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Fifty-Two 80's",
+        "lat": 39.6761,
+        "lng": -104.9662,
+        "description": "A modern antique shop offering a nostalgic trip back to the 1980s, filled with memorabilia and vintage collectibles.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "National Ice Core Lab",
+        "lat": 39.7363,
+        "lng": -105.2181,
+        "description": "A research facility preserving ice cores from around the world, providing insights into Earth's climatic history.",
+        "cost": "free",
+        "type": "indoor",
+        "family_friendly": false,
+        "localornational": "National"
+    },
+    {
+        "name": "Big Blue Bear ('I See What You Mean')",
+        "lat": 39.7439,
+        "lng": -104.9956,
+        "description": "An iconic 40-foot-tall sculpture peering into the Colorado Convention Center, symbolizing Denver's playful spirit.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "The Yearling Sculpture",
+        "lat": 39.7373,
+        "lng": -104.9872,
+        "description": "A whimsical sculpture of a giant red chair with a horse atop it, standing in front of the Denver Public Library.",
+        "cost": "free",
+        "type": "outdoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "Mayan Theatre",
+        "lat": 39.7189,
+        "lng": -104.9835,
+        "description": "A historic theater, built in 1930, showcasing rare Mayan Revival architecture and screening independent films.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Center for Colorado Women's History",
+        "lat": 39.7375,
+        "lng": -104.9873,
+        "description": "A museum focusing on the achievements and contributions of Colorado women throughout history.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    },
+    {
+        "name": "American Museum of Western Art",
+        "lat": 39.7432,
+        "lng": -104.9902,
+        "description": "A museum offering a vast collection of art depicting the American West, housed in a historic building.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "National"
+    },
+    {
+        "name": "Black American West Museum",
+        "lat": 39.7582,
+        "lng": -104.9768,
+        "description": "A museum highlighting the often-overlooked contributions of African American pioneers in the West.",
+        "cost": "paid",
+        "type": "indoor",
+        "family_friendly": true,
+        "localornational": "local"
+    }
+]
