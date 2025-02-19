@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     loadLocations();
 });
 
+var map;
+var allMarkers = [];
+var siteData = [];
+
 function loadFilters() {
     const filters = {
         timePeriodFilter: ["All", "Prehistoric", "Indigenous & Native History", "Colonial & Early Settlements",
@@ -63,6 +67,75 @@ function loadFilters() {
     });
 }
 
+function loadLocations() {
+    fetch('locations.json')
+        .then(response => response.json())
+        .then(data => {
+            siteData = data;
+            initializeMap();
+            applyFilters();
+        })
+        .catch(error => console.error("Error loading JSON:", error));
+}
+
+function initializeMap() {
+    if (!map) {
+        map = L.map('map').setView([39.7392, -104.9903], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+    }
+}
+
 function applyFilters() {
-    console.log("Filters applied! (To be linked with the data)");
+    let selectedFilters = {
+        timePeriod: document.getElementById("timePeriodFilter").value,
+        thematicCategory: document.getElementById("thematicCategoryFilter").value,
+        siteType: document.getElementById("siteTypeFilter").value,
+        historyScope: document.getElementById("historyScopeFilter").value,
+        timeframe: document.getElementById("timeframeFilter").value,
+        cost: document.getElementById("costFilter").value,
+        distance: document.getElementById("distanceFilter").value,
+        reservation: document.getElementById("reservationFilter").value,
+        tourType: document.getElementById("tourTypeFilter").value,
+        transit: document.getElementById("transitFilter").value,
+        family: document.getElementById("familyFilter").value,
+        dogFriendly: document.getElementById("dogFriendlyFilter").value,
+        giftShop: document.getElementById("giftShopFilter").value,
+        dining: document.getElementById("diningFilter").value,
+        hiddenGem: document.getElementById("hiddenGemFilter").value,
+        mustSee: document.getElementById("mustSeeFilter").value,
+        monday: document.getElementById("mondayFilter").value,
+        openLate: document.getElementById("openLateFilter").value,
+        openEarly: document.getElementById("openEarlyFilter").value,
+        luggageStorage: document.getElementById("luggageStorageFilter").value,
+        payment: document.getElementById("paymentFilter").value,
+        publicAccess: document.getElementById("publicAccessFilter").value
+    };
+
+    let resultsContainer = document.getElementById("searchResults");
+    resultsContainer.innerHTML = "";
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers = [];
+
+    siteData.forEach(site => {
+        let matchesFilters = Object.keys(selectedFilters).every(filterKey => {
+            let filterValue = selectedFilters[filterKey].toLowerCase();
+            return filterValue === "all" || (site[filterKey] && site[filterKey].toLowerCase() === filterValue);
+        });
+
+        if (matchesFilters) {
+            let marker = L.marker([site.lat, site.lng]).bindPopup(
+                `<b>${site.name}</b><br>${site.description}<br><b>Cost:</b> ${site.cost}<br>
+                 <b>Type:</b> ${site.type}<br><b>Family Friendly:</b> ${site.family_friendly ? "Yes" : "No"}`
+            );
+            marker.addTo(map);
+            allMarkers.push(marker);
+
+            let siteCard = document.createElement("div");
+            siteCard.classList.add("site-card");
+            siteCard.innerHTML = `<h3>${site.name}</h3><p>${site.description}</p>`;
+            resultsContainer.appendChild(siteCard);
+        }
+    });
 }
